@@ -6,12 +6,17 @@ Lato Admin
     <h1>All Posts</h1>
     <div><a href="{{route('admin.posts.create')}}" class="btn btn-primary">Add post</a></div>
   </div>
-    
+  @if (session('message'))
+  <div class="alert alert-success">
+      {{ session('message') }}
+  </div>
+  @endif
     <table class="table table-striped table-inverse table-responsive">
         <thead class="thead-inverse">
           <tr>
             <th>ID</th>
             <th>TITLE</th>
+            <th>Category</th>
             <th>Slug</th>
             <th>Cover Image</th>
             <th>Actions</th>
@@ -23,9 +28,10 @@ Lato Admin
           <tr>
             <td scope="row">{{$post->id}}</td>
             <td>{{$post->title}}</td>
+            <td>Category: {{ $post->category ? $post->category->name : 'Uncategorized'}}</td>
             <td>{{$post->slug}}</td>
             <td><img width ="150px"src="{{$post->cover_image}}" alt="Cover image {{$post->title}}"></td>
-            <td>
+            <td class="d-flex">
               <a class="btn btn-primary" href="{{route('admin.posts.show', $post->id)}}">View</a>
               <a class="btn btn-secondary" href="{{route('admin.posts.edit', $post->id)}}">Edit</a>  
 
